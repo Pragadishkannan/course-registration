@@ -34,7 +34,7 @@ function CourseCard({ course, onEnroll, isEnrolling, studentSchedule }) {
   }[schedule_time] || 'bg-gray-50 text-gray-700 border-gray-200';
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+    <div className="bg-white border border-gray-200/90 rounded-xl p-5 shadow-md shadow-gray-200/80 hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <h3 className="text-lg font-bold text-gray-900 leading-snug">{course_name}</h3>
