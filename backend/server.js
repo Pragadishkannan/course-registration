@@ -13,6 +13,19 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    message: 'Nool Tech Academy API is running',
+    endpoints: {
+      courses: '/api/courses',
+      schedule: '/api/schedule',
+      enrollments: '/api/enrollments'
+    }
+  });
+});
+
 // Routes
 app.use('/api/courses', courseRoutes);
 app.use('/api/schedule', scheduleRoutes);
