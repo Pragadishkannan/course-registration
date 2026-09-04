@@ -3,9 +3,7 @@ const pool = require('../db/pool');
 const DEFAULT_STUDENT_ID = 1;
 
 // Get current student's enrolled and waitlisted courses
-const getSchedule = async (req, res) => {
-  const studentId = DEFAULT_STUDENT_ID;
-
+const getSchedule = async (_req, res) => {
   try {
     const result = await pool.query(
       `SELECT e.id AS enrollment_id, e.status,
@@ -14,7 +12,7 @@ const getSchedule = async (req, res) => {
        JOIN courses c ON e.course_id = c.id
        WHERE e.student_id = $1
        ORDER BY c.schedule_time`,
-      [studentId]
+      [DEFAULT_STUDENT_ID]
     );
 
     res.json(result.rows);

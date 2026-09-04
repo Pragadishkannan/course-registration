@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Root route
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.json({
     status: 'online',
     message: 'Nool Tech Academy API is running',
@@ -32,7 +32,7 @@ app.use('/api/schedule', scheduleRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 
 // Basic error handling
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong on the server.' });
 });

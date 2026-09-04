@@ -18,7 +18,7 @@ const createEnrollment = async (req, res) => {
 
     // Step 1: Validate student
     const studentResult = await client.query(
-      'SELECT id, name FROM students WHERE id = $1',
+      'SELECT name FROM students WHERE id = $1',
       [student_id]
     );
     if (studentResult.rows.length === 0) {
@@ -29,7 +29,7 @@ const createEnrollment = async (req, res) => {
 
     // Step 2: Validate course and lock the row for safe capacity check
     const courseResult = await client.query(
-      'SELECT id, course_name, schedule_time, max_capacity, current_enrolled FROM courses WHERE id = $1 FOR UPDATE',
+      'SELECT course_name, schedule_time, max_capacity, current_enrolled FROM courses WHERE id = $1 FOR UPDATE',
       [course_id]
     );
     if (courseResult.rows.length === 0) {
@@ -52,7 +52,7 @@ const createEnrollment = async (req, res) => {
 
     // Step 4: Check schedule conflict (both Enrolled and Waitlisted count)
     const conflictCheck = await client.query(
-      `SELECT e.id, c.course_name, c.schedule_time
+      `SELECT 1
        FROM enrollments e
        JOIN courses c ON e.course_id = c.id
        WHERE e.student_id = $1 AND c.schedule_time = $2`,
@@ -125,7 +125,7 @@ const cancelEnrollment = async (req, res) => {
 
     // Check if enrollment exists
     const enrollmentResult = await client.query(
-      'SELECT id, student_id, course_id, status FROM enrollments WHERE id = $1 FOR UPDATE',
+      'SELECT course_id, status FROM enrollments WHERE id = $1 FOR UPDATE',
       [id]
     );
 

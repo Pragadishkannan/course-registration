@@ -1,7 +1,7 @@
 const pool = require('../db/pool');
 
 // Get all courses with calculated seats_remaining
-const getCourses = async (req, res) => {
+const getCourses = async (_req, res) => {
   try {
     const result = await pool.query(
       `SELECT id, course_name, schedule_time, max_capacity, current_enrolled,
