@@ -11,6 +11,7 @@ function App() {
   const [enrollingCourseId, setEnrollingCourseId] = useState(null);
   const [droppingId, setDroppingId] = useState(null);
   const [toast, setToast] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Load courses and student schedule on mount
   const loadData = useCallback(async () => {
@@ -77,6 +78,8 @@ function App() {
               onEnroll={handleEnroll}
               enrollingCourseId={enrollingCourseId}
               schedule={schedule}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
             />
           </div>
 
